@@ -1,0 +1,380 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Artist{
+    id              Int @id @default(autoincrement())
+    name            String
+    gender          String
+    birthDate       String @map("birth_date")
+    birthPlace      String @map("birth_place")
+    specialist      String
+    biography       String
+    active          Boolean @default(true)
+    createdAt       DateTime @default(now()) @map("created_at")
+    updatedAt       DateTime @updatedAt @map("updated_at")
+
+    products        Product[]
+    @@map("artists")
+}
+
+model Customer{
+    id                  String @id @default(uuid())
+    name                String
+    email               String @unique
+    phone               String @unique
+    emailVerifiedAt     DateTime? @map("email_verified_at")
+    password            String @unique 
+    gender              String
+    active              Boolean @default(true)
+    point               Int?
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    reviewProducts      ProductReview[]
+    billingAddress      BillingAddress[]
+    shippingAddress     ShippingAddress[]
+    orders              Order[]
+    storeReviews        StoreReview[]
+    deliveryService     DeliveryService[]
+    wishlists           Wishlist[]
+    productRatings      ProductRating[]
+    @@map("customers")
+}
+
+model Seller{
+    id                  String @id @default(uuid())
+    name                String
+    email               String @unique
+    phone               String @unique
+    emailVerifiedAt     DateTime? @map("email_verified_at")
+    password            String
+    active              Boolean @default(true)
+
+    store               Store?
+    @@map("sellers")
+}
+
+model StoreCategory{
+    id                  Int @id @default(autoincrement())
+    name                String
+    photo               String
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    stores              Store[]
+    @@map("store_categories")
+}
+
+model Store{
+    id                  String @id @default(uuid())
+    seller              Seller @relation(fields: [sellerId], references: [id])
+    sellerId            String @map("seller_id")
+    category            StoreCategory @relation(fields: [categoryId], references: [id])
+    categoryId          Int @map("store_category_id")
+
+    name                String
+    email               String @unique
+    phone               String @unique
+    address             String
+    active              Boolean @default(true)
+    photo               String?
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    products            Product[]
+    reviews             StoreReview[]
+
+    @@map("stores")
+}
+
+model Category{
+    id              Int @id @default(autoincrement())
+    name            String
+    photo           String
+    createdAt       DateTime @default(now()) @map("created_at")
+    updatedAt       DateTime @updatedAt @map("updated_at")
+
+    products        Product[]
+    @@map("categories")
+}
+
+model Product{
+    id                  String @id @default(uuid())
+    category            Category @relation(fields: [categoryId], references: [id])
+    categoryId          Int @map("category_id")
+    artist              Artist @relation(fields: [artistId], references: [id])
+    artistId            Int @map("artist_id")
+    store               Store @relation(fields: [storeId], references: [id])
+    storeId             String @map("store_id")
+    sku                 String @map("code_number") @unique
+    slug                String @unique
+    brand               String?
+    name                String
+    description         String
+    details             String?
+    price               Int @map("latest_price")
+    oldPrice            Int? @map("old_price")
+    stock               Int @map("amount")
+    weight              Int
+    length              Int?
+    width               Int?
+    height              Int? @map("high")
+    size                String?
+    color               String? @map("color_family")
+    view                Int?
+    like                Int?
+    sold                Int?
+    isDiscounted        Boolean @map("discounted") @default(false)
+    discount            Int? @map("discounted_amount")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    images              ProductImage[]
+    reviews             ProductReview[] 
+    orders              OrderItem[]
+    wishlists           Wishlist[]
+    ratings             ProductRating[]
+    @@map("products")
+}
+
+model ProductImage{
+    id                  Int @id @default(autoincrement())
+    product             Product @relation(fields: [productId], references: [id])
+    productId           String @map("product_id")
+    name                String
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("product_images")
+}
+
+model ProductReview{
+    id                  Int @id @default(autoincrement())
+    product             Product @relation(fields: [productId], references: [id])
+    productId           String @map("product_id")
+    customer            Customer @relation(fields: [customerId], references: [id])
+    customerId          String @map("customer_id")
+    comment             String? @map("review")
+    helpful             Int?
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    media               ProductReviewMedia[]
+    @@map("product_reviews")
+}
+
+model ProductReviewMedia{
+    id                  Int @id @default(autoincrement())
+    productReview       ProductReview @relation(fields: [productReviewId], references: [id])
+    productReviewId     Int @map("product_review_id")
+    name                String @map("media")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("product_review_media")
+}
+
+model Province {
+    id                  Int @id @default(autoincrement())
+    provinceId          Int @map("province_id")
+    name                String @map("title")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    cities              City[]
+    billingAddress      BillingAddress[]
+    shippingAddress     ShippingAddress?
+    @@map("provinces")
+}
+
+model City{
+    id                  Int @id @default(autoincrement())
+    cityId              Int @map("city_id")
+    province            Province @relation(fields: [provinceId], references: [id])
+    provinceId          Int @map("province_id")
+    name                String @map("title")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    billingAddress      BillingAddress[]
+    shippingAddress     ShippingAddress[]
+    @@map("cities")
+}
+
+model BillingAddress{
+    id                  String @id @default(uuid())
+    customer            Customer @relation(fields: [customerId], references: [id])
+    customerId          String @map("customer_id")
+    province            Province @relation(fields: [provinceId], references: [id])
+    provinceId          Int @map("province_id")
+    city                City @relation(fields: [cityId], references: [id])
+    cityId              Int @map("city_id")
+
+    zipCode             String @map("zip_code")
+    addressLine1        String @map("address_line_1")
+    addressLine2        String? @map("address_line_2")
+
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+    
+    orders              Order[]
+
+    @@map("billing_addresses")
+}
+
+model ShippingAddress{
+    id                  String @id @default(uuid())
+    customer            Customer @relation(fields: [customerId], references: [id])
+    customerId          String @map("customer_id")
+    province            Province @relation(fields: [provinceId], references: [id])
+    provinceId          Int @map("province_id")
+    city                City @relation(fields: [cityId], references: [id])
+    cityId              Int @map("city_id")
+
+    zipCode             String @map("zip_code")
+    addressLine1        String @map("address_line_1")
+    addressLine2        String? @map("address_line_2")
+
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    orders              Order[]
+
+    @@map("shipping_addresses")
+}
+
+model Courier{
+    id                  Int @id @default(autoincrement())
+    code                String
+    title               String
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("couriers")   
+}
+
+model Order{
+    id                  String @id @default(uuid())
+    number              String @unique @map("order_number")
+    customer            Customer @relation(fields: [customerId], references: [id])
+    customerId          String @map("customer_id")
+    price               Int @map("total_price")
+    paymentStatus       Int @map("payment_status") @default(1)
+    snapToken           String? @map("snap_token")
+    courier             String
+    deliveryCost        Int @map("delivery_cost")
+    billingAddress      BillingAddress? @relation(fields: [billingAddressId], references: [id])
+    billingAddressId    String? @map("billing_address")
+    shippingAddress     ShippingAddress @relation(fields: [shippingAddressId], references: [id])
+    shippingAddressId   String @map("shipping_address")
+    discount            Int?
+    delivered           Boolean @map("delivered") @default(false)
+    deliveredAt         DateTime? @map("delivered_at")
+
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    orderItems          OrderItem[]
+    details             OrderDetail?
+    deliveryService     DeliveryService?
+    @@map("orders")
+}
+
+model OrderItem{
+    id                  Int @id @default(autoincrement())
+    order               Order @relation(fields: [orderId], references: [id])
+    orderId             String @map("order_id")
+    product             Product @relation(fields: [productId], references: [id])
+    productId           String @map("product_id")
+    price               Int @map("price")
+    quantity            Int @map("quantity")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("order_products")
+}
+
+model OrderDetail{
+    id                  String @id @default(uuid())
+    order               Order @relation(fields: [orderId], references: [id])
+    orderId             String @map("order_id")
+    statusCode          Int @map("status_code")
+    statusMessage       String @map("status_message")
+    transactionId       String @map("transaction_id")
+    paymentType         String @map("payment_type")
+    transactionTime     DateTime @map("transaction_time")
+    transactionStatus   String @map("transaction_status")
+    fraudStatus         String? @map("fraud_status")
+    paymentCode         String? @map("payment_code")
+    pdfUrl              String? @map("pdf_url")
+    finishRedirectUrl   String? @map("finish_redirect_url")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("order_details")
+}
+
+model StoreReview {
+    id                  Int @id @default(autoincrement())
+    store               Store @relation(fields: [storeId], references: [id])
+    storeId             String @map("store_id")
+    customer            Customer @relation(fields: [customerId], references: [id])
+    customerId          String @map("customer_id")
+    review              String?
+    helpful             Int @map("helpful")
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("store_reviews")
+}
+
+model DeliveryService{
+    id                  Int @id @default(autoincrement())
+    customer            Customer @relation(fields: [customerId], references: [id])
+    customerId          String @map("customer_id")
+    order               Order @relation(fields: [orderId], references: [id])
+    orderId             String @map("order_id")
+    cityOrigin          Int @map("city_origin_id")
+    cityDestination     Int @map("city_destination_id")
+    courier             String
+    service             String
+    cost                Int
+    estimatedDay        String @map("estimated_day")
+
+    createdAt           DateTime @default(now()) @map("created_at")
+    updatedAt           DateTime @updatedAt @map("updated_at")
+
+    @@map("delivery_services")
+}
+
+model Wishlist{
+    id                Int @id @default(autoincrement())
+    customer          Customer @relation(fields: [customerId], references: [id])
+    customerId        String @map("customer_id")
+    product           Product @relation(fields: [productId], references: [id])
+    productId         String @map("product_id")
+    createdAt         DateTime @default(now()) @map("created_at")
+    updatedAt         DateTime @updatedAt @map("updated_at")
+
+    @@map("wishlists")
+}
+
+model ProductRating{
+    id                Int @id @default(autoincrement())
+    customer          Customer @relation(fields: [customerId], references: [id])
+    customerId        String @map("customer_id")
+    product           Product @relation(fields: [productId], references: [id])
+    productId         String @map("product_id")
+    rating            Int @map("value")
+    createdAt         DateTime @default(now()) @map("created_at")
+    updatedAt         DateTime @updatedAt @map("updated_at")
+
+    @@map("product_ratings")
+}
