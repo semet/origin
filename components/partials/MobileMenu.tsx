@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { toggCategoryleSidebar, toggleCart } from "../../features/menu/menuSlice";
+import { toggleCategoryleSidebar, toggleCart } from "../../features/menu/menuSlice";
 
 const MobileMenu = () => {
 	const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const MobileMenu = () => {
 			<button
 				className="cate-btn"
 				title="Category List"
-				onClick={() => dispatch(toggCategoryleSidebar())}
+				onClick={() => dispatch(toggleCategoryleSidebar())}
 			>
 				<i className="fas fa-list" />
 				<span>category</span>

@@ -12,7 +12,7 @@ const menuSlice = createSlice({
 	name: "menu",
 	initialState,
 	reducers: {
-		toggCategoryleSidebar: (state: MenuState) => {
+		toggleCategoryleSidebar: (state: MenuState) => {
 			state.isCategorySidebarOpen = !state.isCategorySidebarOpen;
 		},
 
@@ -30,7 +30,7 @@ const menuSlice = createSlice({
 	},
 });
 
-export const { toggCategoryleSidebar, toggleMobileSidebar, toggleCart, toggleSearch } =
+export const { toggleCategoryleSidebar, toggleMobileSidebar, toggleCart, toggleSearch } =
 	menuSlice.actions;
 
 export default menuSlice.reducer;

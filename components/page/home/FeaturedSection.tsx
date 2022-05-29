@@ -15,7 +15,7 @@ const FeaturedSection = () => {
 				<div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
 					{[...Array(6)].map((product, index) => (
 						<div className="col" key={index}>
-							<div className="feature-card">
+							<div className="feature-card shadow-sm">
 								<div className="feature-media">
 									<div className="feature-label">
 										<label className="label-text feat">feature</label>

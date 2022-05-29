@@ -44,7 +44,7 @@ const MixedStatus = () => {
 					<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 						{[...Array(10)].map((product, index) => (
 							<div className="col" key={index}>
-								<div className="product-card">
+								<div className="product-card shadow-sm">
 									<div className="product-media">
 										<div className="product-label">
 											<label className="label-text order">314</label>
@@ -124,7 +124,7 @@ const MixedStatus = () => {
 					<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 						{[...Array(10)].map((product, index) => (
 							<div className="col" key={index}>
-								<div className="product-card">
+								<div className="product-card shadow-sm">
 									<div className="product-media">
 										<div className="product-label">
 											<label className="label-text rate">4.8</label>
@@ -204,7 +204,7 @@ const MixedStatus = () => {
 					<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 						{[...Array(10)].map((product, index) => (
 							<div className="col" key={index}>
-								<div className="product-card">
+								<div className="product-card shadow-sm">
 									<div className="product-media">
 										<div className="product-label">
 											<label className="label-text off">-10%</label>

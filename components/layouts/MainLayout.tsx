@@ -1,5 +1,11 @@
+import { useRouter } from "next/router";
 import React, { FC, Fragment, ReactNode, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	toggleCart,
+	toggleCategoryleSidebar,
+	toggleMobileSidebar,
+} from "../../features/menu/menuSlice";
 import { RootState } from "../../features/store";
 import HeaderTop from "../header/HeaderTop";
 import MainHeader from "../header/MainHeader";
@@ -16,13 +22,30 @@ import ProductPreview from "../partials/ProductPreview";
 import ServiceSection from "../partials/ServiceSection";
 
 const MainLayout: FC<{ children?: ReactNode }> = ({ children }) => {
+	const dispatch = useDispatch();
+	const router = useRouter();
 	const { isCartOpen, isCategorySidebarOpen, isMobileSidebarOpen } = useSelector(
 		(store: RootState) => store.menu
 	);
 	useEffect(() => {
+		const handleRouteChange = () => {
+			return isCartOpen
+				? dispatch(toggleCart())
+				: isMobileSidebarOpen
+				? dispatch(toggleMobileSidebar())
+				: isCategorySidebarOpen
+				? dispatch(toggleCategoryleSidebar)
+				: null;
+		};
+
+		router.events.on("routeChangeStart", handleRouteChange);
 		document.body.style.overflow =
 			isCartOpen || isCategorySidebarOpen || isMobileSidebarOpen ? "hidden" : "";
-	});
+
+		return () => {
+			router.events.on("routeChangeStart", handleRouteChange);
+		};
+	}, [dispatch, isCartOpen, isCategorySidebarOpen, isMobileSidebarOpen, router.events]);
 	return (
 		<Fragment>
 			{/* Back to top */}

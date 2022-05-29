@@ -25,7 +25,7 @@ const NewItemSection = () => {
 						>
 							{[...Array(10)].map((product, index) => (
 								<li key={index}>
-									<div className="product-card">
+									<div className="product-card shadow-sm">
 										<div className="product-media">
 											<div className="product-label">
 												<label className="label-text new">new</label>

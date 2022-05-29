@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import Script from "next/script";
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import { store } from "../features/store";
 import NextNProgress from "nextjs-progressbar";
 import type { AppPropsWithLayout } from "next/app";
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 				crossOrigin="anonymous"
 			/>
 			<NextNProgress
-				color="#404d45"
+				color="#29382f86"
 				startPosition={0.3}
 				stopDelayMs={200}
 				height={3}

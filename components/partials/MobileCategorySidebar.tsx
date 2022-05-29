@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggCategoryleSidebar } from "../../features/menu/menuSlice";
+import { toggleCategoryleSidebar } from "../../features/menu/menuSlice";
 import { RootState } from "../../features/store";
 
 const MobileCategorySidebar = () => {
@@ -15,7 +15,7 @@ const MobileCategorySidebar = () => {
 				</h4>
 				<button
 					className="category-close"
-					onClick={() => dispatch(toggCategoryleSidebar())}
+					onClick={() => dispatch(toggleCategoryleSidebar())}
 				>
 					<i className="icofont-close" />
 				</button>
