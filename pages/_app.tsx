@@ -1,10 +1,11 @@
 import "../styles/globals.css";
-import type { ReactNode } from "react";
-import type { AppPropsWithLayout } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
-import { Provider as StoreProvider } from "react-redux";
+import type { ReactNode } from "react";
 import { store } from "../features/store";
+import NextNProgress from "nextjs-progressbar";
+import type { AppPropsWithLayout } from "next/app";
+import { Provider as StoreProvider } from "react-redux";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout || ((page: ReactNode) => page);
@@ -29,6 +30,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 				integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 				crossOrigin="anonymous"
+			/>
+			<NextNProgress
+				color="#404d45"
+				startPosition={0.3}
+				stopDelayMs={200}
+				height={3}
+				showOnShallow={true}
 			/>
 			{getLayout(<Component {...pageProps} />)}
 		</StoreProvider>

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { MenuState } from "store";
 
 const initialState: MenuState = {
-	isSidebarOpen: false,
+	isCategorySidebarOpen: false,
+	isMobileSidebarOpen: false,
 	isCartOpen: false,
 	isSearchOpen: false,
 };
@@ -11,8 +12,12 @@ const menuSlice = createSlice({
 	name: "menu",
 	initialState,
 	reducers: {
-		toggleSidebar: (state: MenuState) => {
-			state.isSidebarOpen = !state.isSidebarOpen;
+		toggCategoryleSidebar: (state: MenuState) => {
+			state.isCategorySidebarOpen = !state.isCategorySidebarOpen;
+		},
+
+		toggleMobileSidebar: (state: MenuState) => {
+			state.isMobileSidebarOpen = !state.isMobileSidebarOpen;
 		},
 
 		toggleCart: (state: MenuState) => {
@@ -25,6 +30,7 @@ const menuSlice = createSlice({
 	},
 });
 
-export const { toggleSidebar, toggleCart, toggleSearch } = menuSlice.actions;
+export const { toggCategoryleSidebar, toggleMobileSidebar, toggleCart, toggleSearch } =
+	menuSlice.actions;
 
 export default menuSlice.reducer;

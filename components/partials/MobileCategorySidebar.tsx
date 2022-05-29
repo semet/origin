@@ -1,14 +1,22 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggCategoryleSidebar } from "../../features/menu/menuSlice";
+import { RootState } from "../../features/store";
 
 const MobileCategorySidebar = () => {
+	const dispatch = useDispatch();
+	const { isCategorySidebarOpen } = useSelector((state: RootState) => state.menu);
 	return (
-		<aside className="category-sidebar">
+		<aside className={`category-sidebar ${isCategorySidebarOpen ? "active" : ""}`}>
 			<div className="category-header">
 				<h4 className="category-title">
 					<i className="fas fa-align-left" />
 					<span>categories</span>
 				</h4>
-				<button className="category-close">
+				<button
+					className="category-close"
+					onClick={() => dispatch(toggCategoryleSidebar())}
+				>
 					<i className="icofont-close" />
 				</button>
 			</div>

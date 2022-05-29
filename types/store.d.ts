@@ -1,6 +1,7 @@
 declare module "store" {
 	type MenuState = {
-		isSidebarOpen: boolean;
+		isCategorySidebarOpen: boolean;
+		isMobileSidebarOpen: boolean;
 		isCartOpen: boolean;
 		isSearchOpen: boolean;
 	};

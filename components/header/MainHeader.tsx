@@ -8,7 +8,6 @@ import UserImage from "./UserImage";
 const MainHeader = () => {
 	const [activeHeader, setActiveHeader] = useState(false);
 	useEffect(() => {
-		console.log("mount");
 		const handleScroll = () => {
 			if (window.scrollY > 60) {
 				setActiveHeader(true);
@@ -19,7 +18,6 @@ const MainHeader = () => {
 		window.addEventListener("scroll", handleScroll);
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
-			console.log("unmount");
 		};
 	}, []);
 	return (

@@ -1,14 +1,19 @@
 import Image from "next/image";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMobileSidebar } from "../../features/menu/menuSlice";
+import { RootState } from "../../features/store";
 
 const MobileSidebar = () => {
+	const dispatch = useDispatch();
+	const { isMobileSidebarOpen } = useSelector((state: RootState) => state.menu);
 	return (
-		<aside className="nav-sidebar">
+		<aside className={`nav-sidebar ${isMobileSidebarOpen ? "active" : ""}`}>
 			<div className="nav-header">
 				<a href="#">
 					<Image src="/images/logo.png" alt="logo" width={270} height={100} />
 				</a>
-				<button className="nav-close">
+				<button className="nav-close" onClick={() => dispatch(toggleMobileSidebar())}>
 					<i className="icofont-close" />
 				</button>
 			</div>

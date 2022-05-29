@@ -1,18 +1,29 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { toggCategoryleSidebar, toggleCart } from "../../features/menu/menuSlice";
 
 const MobileMenu = () => {
+	const dispatch = useDispatch();
 	return (
 		<div className="mobile-menu">
 			<a href="index.html" title="Home Page">
 				<i className="fas fa-home" />
 				<span>Home</span>
 			</a>
-			<button className="cate-btn" title="Category List">
+			<button
+				className="cate-btn"
+				title="Category List"
+				onClick={() => dispatch(toggCategoryleSidebar())}
+			>
 				<i className="fas fa-list" />
 				<span>category</span>
 			</button>
-			<button className="cart-btn" title="Cartlist">
+			<button
+				className="cart-btn"
+				title="Cartlist"
+				onClick={() => dispatch(toggleCart())}
+			>
 				<i className="fas fa-shopping-basket" />
 				<span>cartlist</span>
 				<sup>9+</sup>
@@ -22,10 +33,9 @@ const MobileMenu = () => {
 				<span>wishlist</span>
 				<sup>0</sup>
 			</a>
-			<a href="compare.html" title="Compare List">
-				<i className="fas fa-random" />
-				<span>compare</span>
-				<sup>0</sup>
+			<a href="#" title="Compare List">
+				<i className="fas fa-user" />
+				<span>User</span>
 			</a>
 		</div>
 	);

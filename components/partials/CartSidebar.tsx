@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "../../features/menu/menuSlice";
@@ -205,10 +206,12 @@ const CartSidebar = () => {
 						<span>apply</span>
 					</button>
 				</form>
-				<a className="cart-checkout-btn" href="checkout.html">
-					<span className="checkout-label">Proceed to Checkout</span>
-					<span className="checkout-price">$369.78</span>
-				</a>
+				<Link href="/shopping/checkout">
+					<a className="cart-checkout-btn">
+						<span className="checkout-label">Proceed to Checkout</span>
+						<span className="checkout-price">$369.78</span>
+					</a>
+				</Link>
 			</div>
 		</aside>
 	);

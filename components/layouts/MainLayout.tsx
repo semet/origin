@@ -16,16 +16,21 @@ import ProductPreview from "../partials/ProductPreview";
 import ServiceSection from "../partials/ServiceSection";
 
 const MainLayout: FC<{ children?: ReactNode }> = ({ children }) => {
-	const { isCartOpen, isSidebarOpen } = useSelector((store: RootState) => store.menu);
+	const { isCartOpen, isCategorySidebarOpen, isMobileSidebarOpen } = useSelector(
+		(store: RootState) => store.menu
+	);
 	useEffect(() => {
-		document.body.style.overflow = isCartOpen || isSidebarOpen ? "hidden" : "";
+		document.body.style.overflow =
+			isCartOpen || isCategorySidebarOpen || isMobileSidebarOpen ? "hidden" : "";
 	});
 	return (
 		<Fragment>
 			{/* Back to top */}
 			<BackTopButton />
 			{/* Backdrop*/}
-			{isCartOpen || isSidebarOpen ? <Backdrop /> : null}
+			{isCartOpen || isCategorySidebarOpen || isMobileSidebarOpen ? (
+				<Backdrop />
+			) : null}
 			{/* Header Top side */}
 			<HeaderTop />
 			{/* Main Header  */}

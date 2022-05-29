@@ -3965,6 +3965,9 @@ tbody tr td:last-child {
 }
 
 @media (max-width: 767px) {
+	.header-top {
+		display: none;
+	}
 	.header-top-welcome,
 	.header-top-list {
 		display: none;
@@ -4239,14 +4242,14 @@ tbody tr td:last-child {
 	height: 45px;
 }
 
-.header-user img,
+.header-menu img,
 .header-src img {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 }
 
-.header-user i,
+.header-menu i,
 .header-src i {
 	width: 40px;
 	height: 40px;
@@ -4264,7 +4267,7 @@ tbody tr td:last-child {
 	-o-transition: all linear 0.3s;
 }
 
-.header-user i:hover,
+.header-menu i:hover,
 .header-src i:hover {
 	color: var(--white);
 	background: var(--primary);
