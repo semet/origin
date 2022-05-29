@@ -1,16 +1,9 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@import url("./fonts/flaticon/flaticon.css");
+@import url("./fonts/icofont/icofont.min.css");
+@import url("./fonts/fontawesome/fontawesome.min.css");
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@import url("./vendor/venobox/venobox.min.css");
+@import url("./vendor/bootstrap/bootstrap.min.css");
 
-* {
-  box-sizing: border-box;
-}
+@import url("./css/main.css");
+@import url("./css/home-grid.css");
