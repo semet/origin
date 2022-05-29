@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 
 declare module "next" {
-	type NextPageWithLayout = NextPage & {
+	type NextPageWithLayout<P = {}> = NextPage<P> & {
 		getLayout?: (page: ReactElement) => ReactNode;
 	};
 }

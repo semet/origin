@@ -1,20 +1,22 @@
+import Head from "next/head";
+import type { HomeProps } from "common";
 import type { NextPageWithLayout } from "next";
 import { Fragment, ReactElement } from "react";
-import Head from "next/head";
+import MainLayout from "../components/layouts/MainLayout";
 import MainBanner from "../components/page/home/MainBanner";
-import CategorySection from "../components/page/home/CategorySection";
-import ProductSaleSection from "../components/page/home/ProductSaleSection";
 import CtaSection from "../components/page/home/CtaSection";
-import FeaturedSection from "../components/page/home/FeaturedSection";
+import MixedStatus from "../components/page/home/MixedStatus";
+import BannerPromo from "../components/page/home/BannerPromo";
+import BrandSection from "../components/page/home/BrandSection";
 import PromoSection from "../components/page/home/PromoSection";
 import NewItemSection from "../components/page/home/NewItemSection";
-import BannerPromo from "../components/page/home/BannerPromo";
-import MixedStatus from "../components/page/home/MixedStatus";
-import BrandSection from "../components/page/home/BrandSection";
+import CategorySection from "../components/page/home/CategorySection";
+import FeaturedSection from "../components/page/home/FeaturedSection";
 import TestimonialSection from "../components/page/home/TestimonialSection";
-import MainLayout from "../components/layouts/MainLayout";
+import ProductSaleSection from "../components/page/home/ProductSaleSection";
+import { allCategories } from "../models/category";
 
-const Home: NextPageWithLayout = () => {
+const Home: NextPageWithLayout<HomeProps> = ({ categories }) => {
 	return (
 		<Fragment>
 			<Head>
@@ -25,7 +27,7 @@ const Home: NextPageWithLayout = () => {
 			{/* MAin Banner */}
 			<MainBanner />
 			{/* Category Section */}
-			<CategorySection />
+			<CategorySection categories={categories} />
 			{/* Sale Section */}
 			<ProductSaleSection />
 			{/* Call To Action */}
@@ -51,3 +53,13 @@ const Home: NextPageWithLayout = () => {
 Home.getLayout = (page: ReactElement) => <MainLayout>{page}</MainLayout>;
 
 export default Home;
+
+export const getStaticProps = async () => {
+	const categories = JSON.parse(JSON.stringify(await allCategories));
+
+	return {
+		props: {
+			categories,
+		},
+	};
+};
