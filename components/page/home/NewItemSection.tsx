@@ -1,10 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Slider from "react-slick";
+import { ProductWithDetails } from "common";
 import { newItems } from "../../../utils/slickConfig";
 import { NextArrow, PrevArrow } from "../../partials/SlickArrows";
+import { setSelectedProduct } from "../../../features/product/productSlice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
-const NewItemSection = () => {
+type Props = {
+	products: ProductWithDetails[];
+};
+const NewItemSection: React.FC<Props> = ({ products }) => {
+	const dispatch: Dispatch<any> = useDispatch();
 	return (
 		<section className="section newitem-part">
 			<div className="container">
@@ -23,31 +31,29 @@ const NewItemSection = () => {
 							prevArrow={<PrevArrow />}
 							className="new-slider slider-arrow"
 						>
-							{[...Array(10)].map((product, index) => (
+							{products.map((product, index) => (
 								<li key={index}>
 									<div className="product-card shadow-sm">
 										<div className="product-media">
 											<div className="product-label">
 												<label className="label-text new">new</label>
+												{product.isDiscounted && (
+													<label className="label-text off">
+														-{product.discount}%
+													</label>
+												)}
 											</div>
 											<button className="product-wish wish">
 												<i className="fas fa-heart" />
 											</button>
 											<a className="product-image" href="product-video.html">
-												<img src="/images/product/15.jpg" alt="product" />
+												<img src={product.images[0].name} alt="product" />
 											</a>
 											<div className="product-widget">
 												<a
-													title="Product Compare"
-													href="compare.html"
+													title="Make an offer"
+													href="#"
 													className="fas fa-random"
-												/>
-												<a
-													title="Product Video"
-													href="https://youtu.be/9xzcVxSBbG8"
-													className="venobox fas fa-play"
-													data-autoplay="true"
-													data-vbtype="video"
 												/>
 												<a
 													title="Product View"
@@ -55,6 +61,9 @@ const NewItemSection = () => {
 													className="fas fa-eye"
 													data-bs-toggle="modal"
 													data-bs-target="#product-view"
+													onClick={() =>
+														dispatch(setSelectedProduct(product.id))
+													}
 												/>
 											</div>
 										</div>
@@ -68,7 +77,7 @@ const NewItemSection = () => {
 												<a href="product-video.html">(3)</a>
 											</div>
 											<h6 className="product-name">
-												<a href="product-video.html">fresh green chilis</a>
+												<a href="product-video.html">{product.name}</a>
 											</h6>
 											<h6 className="product-price">
 												<del>$34</del>

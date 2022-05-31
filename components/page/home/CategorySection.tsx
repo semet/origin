@@ -5,12 +5,11 @@ import Slider from "react-slick";
 import { categorySlider } from "../../../utils/slickConfig";
 import { NextArrow, PrevArrow } from "../../partials/SlickArrows";
 
-const CategorySection: React.FC<{ categories: CategoryAndCount[] }> = ({
-	categories,
-}) => {
-	useEffect(() => {
-		console.log(categories);
-	});
+type Props = {
+	categories: CategoryAndCount[];
+};
+
+const CategorySection: React.FC<Props> = ({ categories }) => {
 	return (
 		<section className="section suggest-part">
 			<div className="container">

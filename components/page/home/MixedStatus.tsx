@@ -1,7 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { ProductWithDetails } from "common";
+import { useDispatch } from "react-redux";
+import { setSelectedProduct } from "../../../features/product/productSlice";
+import { Dispatch } from "@reduxjs/toolkit";
 
-const MixedStatus = () => {
+type Props = Record<"sales" | "features" | "mostLiked", ProductWithDetails[]>;
+
+const MixedStatus: React.FC<Props> = (props) => {
+	const dispatch: Dispatch<any> = useDispatch();
+	const { sales, features, mostLiked } = props;
 	return (
 		<section className="section niche-part">
 			<div className="container">
@@ -28,7 +36,7 @@ const MixedStatus = () => {
 							<li>
 								<a href="#top-rate" className="tab-link" data-bs-toggle="tab">
 									<i className="icofont-star" />
-									<span>top rating</span>
+									<span>most liked</span>
 								</a>
 							</li>
 							<li>
@@ -42,31 +50,31 @@ const MixedStatus = () => {
 				</div>
 				<div className="tab-pane fade show active" id="top-order">
 					<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-						{[...Array(10)].map((product, index) => (
+						{features.map((product, index) => (
 							<div className="col" key={index}>
 								<div className="product-card shadow-sm">
 									<div className="product-media">
 										<div className="product-label">
-											<label className="label-text order">314</label>
+											<label className="label-text order">
+												{product.sold} Sold
+											</label>
+											{product.isDiscounted && (
+												<label className="label-text off">
+													-{product.discount} %
+												</label>
+											)}
 										</div>
 										<button className="product-wish wish">
 											<i className="fas fa-heart" />
 										</button>
 										<a className="product-image" href="product-video.html">
-											<img src="/images/product/01.jpg" alt="product" />
+											<img src={product.images[0].name} alt={product.slug} />
 										</a>
 										<div className="product-widget">
 											<a
-												title="Product Compare"
-												href="compare.html"
+												title="Make an Offer"
+												href="#"
 												className="fas fa-random"
-											/>
-											<a
-												title="Product Video"
-												href="https://youtu.be/9xzcVxSBbG8"
-												className="venobox fas fa-play"
-												data-autoplay="true"
-												data-vbtype="video"
 											/>
 											<a
 												title="Product View"
@@ -74,6 +82,9 @@ const MixedStatus = () => {
 												className="fas fa-eye"
 												data-bs-toggle="modal"
 												data-bs-target="#product-view"
+												onClick={() =>
+													dispatch(setSelectedProduct(product.id))
+												}
 											/>
 										</div>
 									</div>
@@ -84,36 +95,22 @@ const MixedStatus = () => {
 											<i className="active icofont-star" />
 											<i className="active icofont-star" />
 											<i className="icofont-star" />
-											<a href="product-video.html">(3)</a>
 										</div>
 										<h6 className="product-name">
-											<a href="product-video.html">fresh green chilis</a>
+											<a href="product-video.html">{product.name}</a>
 										</h6>
 										<h6 className="product-price">
-											<del>$34</del>
-											<span>
-												$28<small>/piece</small>
-											</span>
+											{product.oldPrice && (
+												<del>
+													Rp.{product.oldPrice.toLocaleString("id-ID")}
+												</del>
+											)}
+											<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 										</h6>
 										<button className="product-add" title="Add to Cart">
 											<i className="fas fa-shopping-basket" />
 											<span>add</span>
 										</button>
-										<div className="product-action">
-											<button className="action-minus" title="Quantity Minus">
-												<i className="icofont-minus" />
-											</button>
-											<input
-												className="action-input"
-												title="Quantity Number"
-												type="text"
-												name="quantity"
-												defaultValue={1}
-											/>
-											<button className="action-plus" title="Quantity Plus">
-												<i className="icofont-plus" />
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -122,38 +119,42 @@ const MixedStatus = () => {
 				</div>
 				<div className="tab-pane fade" id="top-rate">
 					<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-						{[...Array(10)].map((product, index) => (
+						{mostLiked.map((product, index) => (
 							<div className="col" key={index}>
 								<div className="product-card shadow-sm">
 									<div className="product-media">
 										<div className="product-label">
-											<label className="label-text rate">4.8</label>
+											<label className="label-text rate">
+												{product.like} Likes
+											</label>
+											{product.isDiscounted && (
+												<label className="label-text off">
+													-{product.discount} %
+												</label>
+											)}
 										</div>
 										<button className="product-wish wish">
 											<i className="fas fa-heart" />
 										</button>
 										<a className="product-image" href="product-video.html">
-											<img src="/images/product/11.jpg" alt="product" />
+											<img src={product.images[0].name} alt={product.slug} />
 										</a>
 										<div className="product-widget">
 											<a
-												title="Product Compare"
-												href="compare.html"
+												title="Make an offer"
+												href="#"
 												className="fas fa-random"
 											/>
-											<a
-												title="Product Video"
-												href="https://youtu.be/9xzcVxSBbG8"
-												className="venobox fas fa-play"
-												data-autoplay="true"
-												data-vbtype="video"
-											/>
+
 											<a
 												title="Product View"
 												href="#"
 												className="fas fa-eye"
 												data-bs-toggle="modal"
 												data-bs-target="#product-view"
+												onClick={() =>
+													dispatch(setSelectedProduct(product.id))
+												}
 											/>
 										</div>
 									</div>
@@ -164,36 +165,22 @@ const MixedStatus = () => {
 											<i className="active icofont-star" />
 											<i className="active icofont-star" />
 											<i className="icofont-star" />
-											<a href="product-video.html">(3)</a>
 										</div>
 										<h6 className="product-name">
-											<a href="product-video.html">fresh green chilis</a>
+											<a href="#">{product.name}</a>
 										</h6>
 										<h6 className="product-price">
-											<del>$34</del>
-											<span>
-												$28<small>/piece</small>
-											</span>
+											{product.oldPrice && (
+												<del>
+													Rp.{product.oldPrice.toLocaleString("id-ID")}
+												</del>
+											)}
+											<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 										</h6>
 										<button className="product-add" title="Add to Cart">
 											<i className="fas fa-shopping-basket" />
 											<span>add</span>
 										</button>
-										<div className="product-action">
-											<button className="action-minus" title="Quantity Minus">
-												<i className="icofont-minus" />
-											</button>
-											<input
-												className="action-input"
-												title="Quantity Number"
-												type="text"
-												name="quantity"
-												defaultValue={1}
-											/>
-											<button className="action-plus" title="Quantity Plus">
-												<i className="icofont-plus" />
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -202,38 +189,37 @@ const MixedStatus = () => {
 				</div>
 				<div className="tab-pane fade" id="top-disc">
 					<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-						{[...Array(10)].map((product, index) => (
+						{sales.map((product, index) => (
 							<div className="col" key={index}>
 								<div className="product-card shadow-sm">
 									<div className="product-media">
 										<div className="product-label">
-											<label className="label-text off">-10%</label>
+											<label className="label-text off">
+												-{product.discount}%
+											</label>
 										</div>
 										<button className="product-wish wish">
 											<i className="fas fa-heart" />
 										</button>
 										<a className="product-image" href="product-video.html">
-											<img src="/images/product/06.jpg" alt="product" />
+											<img src={product.images[0].name} alt={product.slug} />
 										</a>
 										<div className="product-widget">
 											<a
-												title="Product Compare"
+												title="Make an offer"
 												href="compare.html"
 												className="fas fa-random"
 											/>
-											<a
-												title="Product Video"
-												href="https://youtu.be/9xzcVxSBbG8"
-												className="venobox fas fa-play"
-												data-autoplay="true"
-												data-vbtype="video"
-											/>
+
 											<a
 												title="Product View"
 												href="#"
 												className="fas fa-eye"
 												data-bs-toggle="modal"
 												data-bs-target="#product-view"
+												onClick={() =>
+													dispatch(setSelectedProduct(product.id))
+												}
 											/>
 										</div>
 									</div>
@@ -244,16 +230,17 @@ const MixedStatus = () => {
 											<i className="active icofont-star" />
 											<i className="active icofont-star" />
 											<i className="icofont-star" />
-											<a href="product-video.html">(3)</a>
 										</div>
 										<h6 className="product-name">
-											<a href="product-video.html">fresh green chilis</a>
+											<a href="product-video.html">{product.name}</a>
 										</h6>
 										<h6 className="product-price">
-											<del>$34</del>
-											<span>
-												$28<small>/piece</small>
-											</span>
+											{product.oldPrice && (
+												<del>
+													Rp.{product.oldPrice.toLocaleString("id-ID")}
+												</del>
+											)}
+											<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 										</h6>
 										<button className="product-add" title="Add to Cart">
 											<i className="fas fa-shopping-basket" />

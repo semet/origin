@@ -1,7 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { useDispatch } from "react-redux";
+import { ProductWithDetails } from "common";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setSelectedProduct } from "../../../features/product/productSlice";
+import { isNewProduct } from "../../../utils/common";
 
-const FeaturedSection = () => {
+type Props = {
+	products: ProductWithDetails[];
+};
+const FeaturedSection: React.FC<Props> = ({ products }) => {
+	const dispatch: Dispatch<any> = useDispatch();
 	return (
 		<section className="section feature-part">
 			<div className="container">
@@ -13,44 +22,48 @@ const FeaturedSection = () => {
 					</div>
 				</div>
 				<div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
-					{[...Array(6)].map((product, index) => (
+					{products.map((product, index) => (
 						<div className="col" key={index}>
 							<div className="feature-card shadow-sm">
 								<div className="feature-media">
 									<div className="feature-label">
+										{product.isDiscounted ? (
+											<label className="view-label off">
+												-{product.discount}%
+											</label>
+										) : null}
+
+										{isNewProduct(product) && (
+											<label className="view-label new">New</label>
+										)}
 										<label className="label-text feat">feature</label>
 									</div>
 									<button className="feature-wish wish">
 										<i className="fas fa-heart" />
 									</button>
 									<a className="feature-image" href="product-video.html">
-										<img src="/images/product/09.jpg" alt="product" />
+										<img src={product.images[0].name} alt="product" />
 									</a>
 									<div className="feature-widget">
 										<a
-											title="Product Compare"
-											href="compare.html"
+											title="Make an offer"
+											href="#"
 											className="fas fa-random"
 										/>
-										<a
-											title="Product Video"
-											href="https://youtu.be/9xzcVxSBbG8"
-											className="venobox fas fa-play"
-											data-autoplay="true"
-											data-vbtype="video"
-										/>
+
 										<a
 											title="Product View"
 											href="#"
 											className="fas fa-eye"
 											data-bs-toggle="modal"
 											data-bs-target="#product-view"
+											onClick={() => dispatch(setSelectedProduct(product.id))}
 										/>
 									</div>
 								</div>
 								<div className="feature-content">
 									<h6 className="feature-name">
-										<a href="product-video.html">fresh organic green chilis</a>
+										<a href="product-video.html">{product.name}</a>
 									</h6>
 									<div className="feature-rating">
 										<i className="active icofont-star" />
@@ -61,15 +74,15 @@ const FeaturedSection = () => {
 										<a href="product-video.html">(3 Reviews)</a>
 									</div>
 									<h6 className="feature-price">
-										<del>$34</del>
-										<span>
-											$28<small>/piece</small>
-										</span>
+										{product.isDiscounted && (
+											<del>
+												Rp. {product.oldPrice?.toLocaleString("id-ID")}
+											</del>
+										)}
+
+										<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 									</h6>
-									<p className="feature-desc">
-										Lorem ipsum dolor sit consectetur adipisicing xpedita dicta
-										amet olor ut eveniet commodi...
-									</p>
+									<p className="feature-desc">{product.description}</p>
 									<button className="product-add" title="Add to Cart">
 										<i className="fas fa-shopping-basket" />
 										<span>add</span>

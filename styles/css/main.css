@@ -2148,6 +2148,7 @@ tbody tr td:last-child {
 
 .feature-image img {
 	width: 220px;
+	border-radius: 5px;
 }
 
 .feature-widget {

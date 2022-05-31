@@ -1,25 +1,25 @@
 import { useRouter } from "next/router";
-import React, { FC, Fragment, ReactNode, useEffect } from "react";
+import Navbar from "../partials/Navbar";
+import HeaderTop from "../header/HeaderTop";
+import Backdrop from "../partials/Backdrop";
+import MainHeader from "../header/MainHeader";
+import AppFooter from "../partials/AppFooter";
+import MobileMenu from "../partials/MobileMenu";
+import type { RootState } from "../../features/store";
+import CartSidebar from "../partials/CartSidebar";
+import MobileSidebar from "../partials/MobileSidebar";
+import BackTopButton from "../partials/BackTopButton";
 import { useDispatch, useSelector } from "react-redux";
+import ProductPreview from "../partials/ProductPreview";
+import NewsletterForm from "../partials/NewsletterForm";
+import ServiceSection from "../partials/ServiceSection";
+import React, { FC, Fragment, ReactNode, useEffect } from "react";
+import MobileCategorySidebar from "../partials/MobileCategorySidebar";
 import {
 	toggleCart,
 	toggleCategoryleSidebar,
 	toggleMobileSidebar,
 } from "../../features/menu/menuSlice";
-import { RootState } from "../../features/store";
-import HeaderTop from "../header/HeaderTop";
-import MainHeader from "../header/MainHeader";
-import AppFooter from "../partials/AppFooter";
-import Backdrop from "../partials/Backdrop";
-import BackTopButton from "../partials/BackTopButton";
-import CartSidebar from "../partials/CartSidebar";
-import MobileCategorySidebar from "../partials/MobileCategorySidebar";
-import MobileMenu from "../partials/MobileMenu";
-import MobileSidebar from "../partials/MobileSidebar";
-import Navbar from "../partials/Navbar";
-import NewsletterForm from "../partials/NewsletterForm";
-import ProductPreview from "../partials/ProductPreview";
-import ServiceSection from "../partials/ServiceSection";
 
 const MainLayout: FC<{ children?: ReactNode }> = ({ children }) => {
 	const dispatch = useDispatch();

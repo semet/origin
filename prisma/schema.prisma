@@ -12,8 +12,8 @@ model Artist{
     id              Int @id @default(autoincrement())
     name            String
     gender          String
-    birthDate       String @map("birth_date")
-    birthPlace      String @map("birth_place")
+    birthDate       DateTime @map("birth_date")
+    birthPlace      DateTime @map("birth_place")
     specialist      String
     biography       String
     active          Boolean @default(true)

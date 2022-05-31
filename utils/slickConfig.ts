@@ -216,3 +216,59 @@ export const testimonialSlider: Settings = {
 		},
 	],
 };
+
+export const productPreview: Settings = {
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	arrows: true,
+	fade: true,
+	responsive: [
+		{
+			breakpoint: 576,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: true,
+			},
+		},
+	],
+};
+
+export const productPreviewThumb: Settings = {
+	slidesToShow: 3,
+	slidesToScroll: 1,
+	dots: false,
+	arrows: false,
+	centerMode: true,
+	focusOnSelect: true,
+	responsive: [
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+			},
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+			},
+		},
+		{
+			breakpoint: 576,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+			},
+		},
+		{
+			breakpoint: 400,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1,
+			},
+		},
+	],
+};

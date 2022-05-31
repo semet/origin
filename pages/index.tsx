@@ -1,7 +1,9 @@
 import Head from "next/head";
+import product from "../models/product";
 import type { HomeProps } from "common";
-import type { NextPageWithLayout } from "next";
+import category from "../models/category";
 import { Fragment, ReactElement } from "react";
+import type { NextPageWithLayout } from "next";
 import MainLayout from "../components/layouts/MainLayout";
 import MainBanner from "../components/page/home/MainBanner";
 import CtaSection from "../components/page/home/CtaSection";
@@ -14,9 +16,10 @@ import CategorySection from "../components/page/home/CategorySection";
 import FeaturedSection from "../components/page/home/FeaturedSection";
 import TestimonialSection from "../components/page/home/TestimonialSection";
 import ProductSaleSection from "../components/page/home/ProductSaleSection";
-import { allCategories } from "../models/category";
 
-const Home: NextPageWithLayout<HomeProps> = ({ categories }) => {
+const Home: NextPageWithLayout<HomeProps> = (props) => {
+	const { categories, sales, featured, latest, mostLiked } = props;
+
 	return (
 		<Fragment>
 			<Head>
@@ -29,19 +32,19 @@ const Home: NextPageWithLayout<HomeProps> = ({ categories }) => {
 			{/* Category Section */}
 			<CategorySection categories={categories} />
 			{/* Sale Section */}
-			<ProductSaleSection />
+			<ProductSaleSection products={sales} />
 			{/* Call To Action */}
 			<CtaSection />
 			{/* Featured Section */}
-			<FeaturedSection />
+			<FeaturedSection products={featured} />
 			{/* Promo Countdown */}
 			<PromoSection />
 			{/* New Products Section */}
-			<NewItemSection />
+			<NewItemSection products={latest} />
 			{/* Promotion Banner */}
 			<BannerPromo />
 			{/* Mixed Product Status */}
-			<MixedStatus />
+			<MixedStatus sales={sales} features={featured} mostLiked={mostLiked} />
 			{/* Brand slider */}
 			<BrandSection />
 			{/* Testimonial */}
@@ -55,11 +58,19 @@ Home.getLayout = (page: ReactElement) => <MainLayout>{page}</MainLayout>;
 export default Home;
 
 export const getStaticProps = async () => {
-	const categories = JSON.parse(JSON.stringify(await allCategories));
-
+	const categories = JSON.parse(JSON.stringify(await category.all()));
+	const sales = JSON.parse(JSON.stringify(await product.onSale(10)));
+	const featured = JSON.parse(JSON.stringify(await product.featured(10)));
+	const latest = JSON.parse(JSON.stringify(await product.latest(10)));
+	const mostLiked = JSON.parse(JSON.stringify(await product.mostLiked(10)));
 	return {
 		props: {
 			categories,
+			sales,
+			featured,
+			latest,
+			mostLiked,
 		},
+		revalidate: 60,
 	};
 };

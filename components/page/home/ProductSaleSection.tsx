@@ -1,7 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import { Dispatch } from "@reduxjs/toolkit";
+import { ProductWithDetails } from "common";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedProduct } from "../../../features/product/productSlice";
 
-const ProductSaleSection = () => {
+type Props = {
+	products: ProductWithDetails[];
+};
+
+const ProductSaleSection: React.FC<Props> = ({ products }) => {
+	const dispatch: Dispatch<any> = useDispatch();
+
 	return (
 		<section className="section recent-part">
 			<div className="container">
@@ -13,7 +23,7 @@ const ProductSaleSection = () => {
 					</div>
 				</div>
 				<div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-					{[...Array(10)].map((product, index) => (
+					{products.map((product, index) => (
 						<div className="col" key={index}>
 							<div className="product-card shadow-sm">
 								<div className="product-media">
@@ -24,27 +34,22 @@ const ProductSaleSection = () => {
 										<i className="fas fa-heart" />
 									</button>
 									<a className="product-image" href="product-video.html">
-										<img src="/images/product/01.jpg" alt="product" />
+										<img src={product.images[0].name} alt="product" />
 									</a>
 									<div className="product-widget">
 										<a
 											title="Product Compare"
 											href="compare.html"
-											className="fas fa-random"
+											className="fas fa-share"
 										/>
-										<a
-											title="Product Video"
-											href="https://youtu.be/9xzcVxSBbG8"
-											className="venobox fas fa-play"
-											data-autoplay="true"
-											data-vbtype="video"
-										/>
+
 										<a
 											title="Product View"
 											href="#"
 											className="fas fa-eye"
 											data-bs-toggle="modal"
 											data-bs-target="#product-view"
+											onClick={() => dispatch(setSelectedProduct(product.id))}
 										/>
 									</div>
 								</div>
@@ -55,36 +60,18 @@ const ProductSaleSection = () => {
 										<i className="active icofont-star" />
 										<i className="active icofont-star" />
 										<i className="icofont-star" />
-										<a href="product-video.html">(3)</a>
 									</div>
 									<h6 className="product-name">
-										<a href="product-video.html">fresh green chilis</a>
+										<a href="#">{product.name}</a>
 									</h6>
 									<h6 className="product-price">
-										<del>$34</del>
-										<span>
-											$28<small>/piece</small>
-										</span>
+										<del>{product.oldPrice}</del>
+										<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 									</h6>
 									<button className="product-add" title="Add to Cart">
 										<i className="fas fa-shopping-basket" />
 										<span>add</span>
 									</button>
-									<div className="product-action">
-										<button className="action-minus" title="Quantity Minus">
-											<i className="icofont-minus" />
-										</button>
-										<input
-											className="action-input"
-											title="Quantity Number"
-											type="text"
-											name="quantity"
-											defaultValue={1}
-										/>
-										<button className="action-plus" title="Quantity Plus">
-											<i className="icofont-plus" />
-										</button>
-									</div>
 								</div>
 							</div>
 						</div>
