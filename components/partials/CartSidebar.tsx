@@ -93,7 +93,9 @@ const CartSidebar = () => {
 				<Link href="/shopping/checkout">
 					<a className="cart-checkout-btn">
 						<span className="checkout-label">Proceed to Checkout</span>
-						<span className="checkout-price">$369.78</span>
+						<span className="checkout-price">
+							Rp.{total.toLocaleString("id-ID")}
+						</span>
 					</a>
 				</Link>
 			</div>
