@@ -19,7 +19,6 @@ import ProductSaleSection from "../components/page/home/ProductSaleSection";
 
 const Home: NextPageWithLayout<HomeProps> = (props) => {
 	const { categories, sales, featured, latest, mostLiked } = props;
-
 	return (
 		<Fragment>
 			<Head>

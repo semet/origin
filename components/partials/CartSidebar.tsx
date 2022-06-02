@@ -19,6 +19,7 @@ const CartSidebar = () => {
 					<i className="icofont-close" />
 				</button>
 			</div>
+
 			<ul className="cart-list">
 				<li className="cart-item">
 					<div className="cart-media">
@@ -198,6 +199,7 @@ const CartSidebar = () => {
 					</div>
 				</li>
 			</ul>
+
 			<div className="cart-footer">
 				<button className="coupon-btn">Do you have a coupon code?</button>
 				<form className="coupon-form">

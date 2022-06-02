@@ -1,17 +1,37 @@
 import { prisma } from "../prisma/db";
 const product = {
 	onSale: async (limit: number) => {
-		return prisma.product.findMany({
+		return await prisma.product.findMany({
 			where: {
 				isDiscounted: true,
 			},
 			orderBy: {
 				discount: "desc",
 			},
-			include: {
-				images: true,
+			select: {
+				id: true,
+				discount: true,
+				isDiscounted: true,
+				name: true,
+				like: true,
+				oldPrice: true,
+				price: true,
+				artist: {
+					select: {
+						name: true,
+					},
+				},
+				images: {
+					select: {
+						name: true,
+					},
+				},
 				// artist: true,
-				category: true,
+				category: {
+					select: {
+						name: true,
+					},
+				},
 				ratings: true,
 				reviews: true,
 			},
@@ -19,14 +39,35 @@ const product = {
 		});
 	},
 	featured: async (limit: number) => {
-		return prisma.product.findMany({
+		return await prisma.product.findMany({
 			orderBy: {
 				sold: "desc",
 			},
-			include: {
-				images: true,
+			select: {
+				id: true,
+				discount: true,
+				description: true,
+				isDiscounted: true,
+				name: true,
+				like: true,
+				oldPrice: true,
+				price: true,
+				artist: {
+					select: {
+						name: true,
+					},
+				},
+				images: {
+					select: {
+						name: true,
+					},
+				},
 				// artist: true,
-				category: true,
+				category: {
+					select: {
+						name: true,
+					},
+				},
 				ratings: true,
 				reviews: true,
 			},
@@ -34,14 +75,34 @@ const product = {
 		});
 	},
 	latest: async (limit: number) => {
-		return prisma.product.findMany({
+		return await prisma.product.findMany({
 			orderBy: {
 				createdAt: "desc",
 			},
-			include: {
-				images: true,
+			select: {
+				id: true,
+				discount: true,
+				isDiscounted: true,
+				name: true,
+				like: true,
+				oldPrice: true,
+				price: true,
+				artist: {
+					select: {
+						name: true,
+					},
+				},
+				images: {
+					select: {
+						name: true,
+					},
+				},
 				// artist: true,
-				category: true,
+				category: {
+					select: {
+						name: true,
+					},
+				},
 				ratings: true,
 				reviews: true,
 			},
@@ -49,14 +110,34 @@ const product = {
 		});
 	},
 	mostLiked: async (limit: number) => {
-		return prisma.product.findMany({
+		return await prisma.product.findMany({
 			orderBy: {
 				like: "asc",
 			},
-			include: {
-				images: true,
+			select: {
+				id: true,
+				discount: true,
+				isDiscounted: true,
+				name: true,
+				like: true,
+				oldPrice: true,
+				price: true,
+				artist: {
+					select: {
+						name: true,
+					},
+				},
+				images: {
+					select: {
+						name: true,
+					},
+				},
 				// artist: true,
-				category: true,
+				category: {
+					select: {
+						name: true,
+					},
+				},
 				ratings: true,
 				reviews: true,
 			},

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	toggleCart,
 	toggleMobileSidebar,
-	toggCategoryleSidebar,
+	toggleCategoryleSidebar,
 } from "../../features/menu/menuSlice";
 import { RootState } from "../../features/store";
 
@@ -17,7 +17,7 @@ const Backdrop = () => {
 		isCartOpen
 			? dispatch(toggleCart())
 			: isCategorySidebarOpen
-			? dispatch(toggCategoryleSidebar())
+			? dispatch(toggleCategoryleSidebar())
 			: isMobileSidebarOpen
 			? dispatch(toggleMobileSidebar())
 			: null;

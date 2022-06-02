@@ -3,7 +3,7 @@ import { prisma } from "../prisma/db";
 
 const category = {
 	all: async () => {
-		return prisma.category.findMany({
+		return await prisma.category.findMany({
 			orderBy: {
 				name: "asc",
 			},

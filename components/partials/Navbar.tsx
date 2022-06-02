@@ -1,6 +1,8 @@
+import { signOut, useSession } from "next-auth/react";
 import React from "react";
 
 const Navbar = () => {
+	const { status, data } = useSession();
 	return (
 		<nav className="navbar-part">
 			<div className="container">
@@ -434,25 +436,26 @@ const Navbar = () => {
 										</li>
 									</ul>
 								</li>
-								<li className="navbar-item dropdown">
-									<a className="navbar-link dropdown-arrow" href="#">
-										blogs
-									</a>
-									<ul className="dropdown-position-list">
-										<li>
-											<a href="blog-grid.html">blog grid</a>
-										</li>
-										<li>
-											<a href="blog-standard.html">blog standard</a>
-										</li>
-										<li>
-											<a href="blog-details.html">blog details</a>
-										</li>
-										<li>
-											<a href="blog-author.html">blog author</a>
-										</li>
-									</ul>
-								</li>
+								{status !== "loading" && status === "authenticated" ? (
+									<li className="navbar-item dropdown">
+										<a className="navbar-link dropdown-arrow" href="#">
+											User
+										</a>
+										<ul className="dropdown-position-list">
+											<li>
+												<a href="#">Order</a>
+											</li>
+											<li>
+												<a href="#">Profile</a>
+											</li>
+											<li>
+												<a href="#" onClick={() => signOut()}>
+													Logout
+												</a>
+											</li>
+										</ul>
+									</li>
+								) : null}
 							</ul>
 							<div className="navbar-info-group">
 								<div className="navbar-info">
