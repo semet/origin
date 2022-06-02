@@ -7,6 +7,7 @@ import { NextArrow, PrevArrow } from "../../partials/SlickArrows";
 import { setSelectedProduct } from "../../../features/product/productSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { addItem } from "../../../features/cart/cartSlice";
 
 type Props = {
 	products: ProductWithDetails[];
@@ -85,28 +86,21 @@ const NewItemSection: React.FC<Props> = ({ products }) => {
 													$28<small>/piece</small>
 												</span>
 											</h6>
-											<button className="product-add" title="Add to Cart">
+											<button
+												className="product-add"
+												title="Add to Cart"
+												onClick={() =>
+													dispatch(
+														addItem({
+															...product,
+															quantity: 1,
+														})
+													)
+												}
+											>
 												<i className="fas fa-shopping-basket" />
 												<span>add</span>
 											</button>
-											<div className="product-action">
-												<button
-													className="action-minus"
-													title="Quantity Minus"
-												>
-													<i className="icofont-minus" />
-												</button>
-												<input
-													className="action-input"
-													title="Quantity Number"
-													type="text"
-													name="quantity"
-													defaultValue={1}
-												/>
-												<button className="action-plus" title="Quantity Plus">
-													<i className="icofont-plus" />
-												</button>
-											</div>
 										</div>
 									</div>
 								</li>

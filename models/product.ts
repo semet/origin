@@ -25,6 +25,7 @@ const product = {
 					select: {
 						name: true,
 					},
+					take: 1,
 				},
 				// artist: true,
 				category: {
@@ -34,6 +35,9 @@ const product = {
 				},
 				ratings: true,
 				reviews: true,
+				sku: true,
+				slug: true,
+				weight: true,
 			},
 			take: limit,
 		});
@@ -61,6 +65,7 @@ const product = {
 					select: {
 						name: true,
 					},
+					take: 1,
 				},
 				// artist: true,
 				category: {
@@ -70,6 +75,9 @@ const product = {
 				},
 				ratings: true,
 				reviews: true,
+				sku: true,
+				slug: true,
+				weight: true,
 			},
 			take: limit,
 		});
@@ -96,6 +104,7 @@ const product = {
 					select: {
 						name: true,
 					},
+					take: 1,
 				},
 				// artist: true,
 				category: {
@@ -105,6 +114,9 @@ const product = {
 				},
 				ratings: true,
 				reviews: true,
+				sku: true,
+				slug: true,
+				weight: true,
 			},
 			take: limit,
 		});
@@ -131,6 +143,7 @@ const product = {
 					select: {
 						name: true,
 					},
+					take: 1,
 				},
 				// artist: true,
 				category: {
@@ -140,6 +153,9 @@ const product = {
 				},
 				ratings: true,
 				reviews: true,
+				sku: true,
+				slug: true,
+				weight: true,
 			},
 			take: limit,
 		});

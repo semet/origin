@@ -5,6 +5,7 @@ import { ProductWithDetails } from "common";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setSelectedProduct } from "../../../features/product/productSlice";
 import { isNewProduct } from "../../../utils/common";
+import { addItem } from "../../../features/cart/cartSlice";
 
 type Props = {
 	products: ProductWithDetails[];
@@ -83,25 +84,21 @@ const FeaturedSection: React.FC<Props> = ({ products }) => {
 										<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 									</h6>
 									<p className="feature-desc">{product.description}</p>
-									<button className="product-add" title="Add to Cart">
+									<button
+										className="product-add"
+										title="Add to Cart"
+										onClick={() =>
+											dispatch(
+												addItem({
+													...product,
+													quantity: 1,
+												})
+											)
+										}
+									>
 										<i className="fas fa-shopping-basket" />
 										<span>add</span>
 									</button>
-									<div className="product-action">
-										<button className="action-minus" title="Quantity Minus">
-											<i className="icofont-minus" />
-										</button>
-										<input
-											className="action-input"
-											title="Quantity Number"
-											type="text"
-											name="quantity"
-											defaultValue={1}
-										/>
-										<button className="action-plus" title="Quantity Plus">
-											<i className="icofont-plus" />
-										</button>
-									</div>
 								</div>
 							</div>
 						</div>

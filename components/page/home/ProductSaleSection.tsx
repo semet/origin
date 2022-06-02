@@ -3,6 +3,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { ProductWithDetails } from "common";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { addItem } from "../../../features/cart/cartSlice";
 import { setSelectedProduct } from "../../../features/product/productSlice";
 
 type Props = {
@@ -68,7 +69,18 @@ const ProductSaleSection: React.FC<Props> = ({ products }) => {
 										<del>{product.oldPrice}</del>
 										<span>Rp.{product.price.toLocaleString("id-ID")}</span>
 									</h6>
-									<button className="product-add" title="Add to Cart">
+									<button
+										className="product-add"
+										title="Add to Cart"
+										onClick={() =>
+											dispatch(
+												addItem({
+													...product,
+													quantity: 1,
+												})
+											)
+										}
+									>
 										<i className="fas fa-shopping-basket" />
 										<span>add</span>
 									</button>

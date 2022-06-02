@@ -1,9 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "../../../features/menu/menuSlice";
+import { RootState } from "../../../features/store";
 
 const CartWidget = () => {
 	const dispatch = useDispatch();
+	const { total, amount } = useSelector((state: RootState) => state.cart);
 	return (
 		<button
 			className="header-widget header-cart"
@@ -11,9 +13,9 @@ const CartWidget = () => {
 			onClick={() => dispatch(toggleCart())}
 		>
 			<i className="fas fa-shopping-basket" />
-			<sup>9+</sup>
+			<sup>{amount}</sup>
 			<span>
-				total price<small>$345.00</small>
+				total price<small>Rp.{total.toLocaleString("id-ID")}</small>
 			</span>
 		</button>
 	);
