@@ -3,8 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import GoogleProvider from "next-auth/providers/google";
-import { prisma } from "../../../prisma/db";
-import { Customer } from "@prisma/client";
 import { compareSync } from "bcrypt";
 import auth from "../../../models/auth";
 

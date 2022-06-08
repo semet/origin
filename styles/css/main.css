@@ -1206,13 +1206,14 @@ button:focus {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
+	min-width: 150px;
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	display: none;
+	/* display: none; */
 }
 
 .product-action button i {
@@ -1245,8 +1246,8 @@ button:focus {
 	padding: 6px 0px;
 	border-radius: 6px;
 	text-align: center;
-	color: var(--white);
-	background: var(--primary);
+	color: var(--text);
+	background: var(--gray-chalk);
 	text-shadow: var(--primary-tshadow);
 }
 
@@ -1304,6 +1305,9 @@ tbody tr td:last-child {
 
 .table-price h6 {
 	white-space: nowrap;
+}
+.table-quantity {
+	width: 170px;
 }
 
 .table-price h6 small {

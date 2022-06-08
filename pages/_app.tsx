@@ -1,9 +1,11 @@
 import "../styles/globals.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import Head from "next/head";
 import Script from "next/script";
 import { ReactNode } from "react";
 import { store } from "../features/store";
 import NextNProgress from "nextjs-progressbar";
+import { ToastContainer } from "react-toastify";
 import { SessionProvider } from "next-auth/react";
 import type { AppPropsWithLayout } from "next/app";
 import { Provider as StoreProvider } from "react-redux";
@@ -40,6 +42,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 					height={3}
 					showOnShallow={true}
 				/>
+				<ToastContainer />
 				{getLayout(<Component {...pageProps} />)}
 			</StoreProvider>
 		</SessionProvider>

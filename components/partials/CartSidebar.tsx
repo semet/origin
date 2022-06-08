@@ -83,21 +83,16 @@ const CartSidebar = () => {
 			</ul>
 
 			<div className="cart-footer">
-				<button className="coupon-btn">Do you have a coupon code?</button>
-				<form className="coupon-form">
-					<input type="text" placeholder="Enter your coupon code" />
-					<button type="submit">
-						<span>apply</span>
-					</button>
-				</form>
-				<Link href="/shopping/checkout">
-					<a className="cart-checkout-btn">
-						<span className="checkout-label">Proceed to Checkout</span>
-						<span className="checkout-price">
-							Rp.{total.toLocaleString("id-ID")}
-						</span>
-					</a>
-				</Link>
+				{total !== 0 && amount !== 0 ? (
+					<Link href="/shopping/checkout">
+						<a className="cart-checkout-btn">
+							<span className="checkout-label">Proceed to Checkout</span>
+							<span className="checkout-price">
+								Rp.{total.toLocaleString("id-ID")}
+							</span>
+						</a>
+					</Link>
+				) : null}
 			</div>
 		</aside>
 	);

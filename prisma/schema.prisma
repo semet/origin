@@ -190,14 +190,14 @@ model Province {
 
     cities              City[]
     billingAddress      BillingAddress[]
-    shippingAddress     ShippingAddress?
+    shippingAddress     ShippingAddress[]
     @@map("provinces")
 }
 
 model City{
     id                  Int @id @default(autoincrement())
     cityId              Int @map("city_id")
-    province            Province @relation(fields: [provinceId], references: [id])
+    province            Province @relation(fields: [provinceId], references: [provinceId])
     provinceId          Int @map("province_id")
     name                String @map("title")
     createdAt           DateTime @default(now()) @map("created_at")
@@ -214,7 +214,7 @@ model BillingAddress{
     customerId          String @map("customer_id")
     province            Province @relation(fields: [provinceId], references: [id])
     provinceId          Int @map("province_id")
-    city                City @relation(fields: [cityId], references: [id])
+    city                City @relation(fields: [cityId], references: [cityId])
     cityId              Int @map("city_id")
 
     zipCode             String @map("zip_code")
@@ -233,7 +233,7 @@ model ShippingAddress{
     id                  String @id @default(uuid())
     customer            Customer @relation(fields: [customerId], references: [id])
     customerId          String @map("customer_id")
-    province            Province @relation(fields: [provinceId], references: [id])
+    province            Province @relation(fields: [provinceId], references: [provinceId])
     provinceId          Int @map("province_id")
     city                City @relation(fields: [cityId], references: [id])
     cityId              Int @map("city_id")

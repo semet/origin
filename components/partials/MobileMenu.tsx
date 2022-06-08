@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleCategoryleSidebar, toggleCart } from "../../features/menu/menuSlice";
+import { RootState } from "../../features/store";
 
 const MobileMenu = () => {
 	const dispatch = useDispatch();
+	const { amount } = useSelector((state: RootState) => state.cart);
 	return (
 		<div className="mobile-menu">
 			<a href="index.html" title="Home Page">
@@ -26,7 +28,7 @@ const MobileMenu = () => {
 			>
 				<i className="fas fa-shopping-basket" />
 				<span>cartlist</span>
-				<sup>9+</sup>
+				<sup>{amount}</sup>
 			</button>
 			<a href="wishlist.html" title="Wishlist">
 				<i className="fas fa-heart" />

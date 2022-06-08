@@ -4,7 +4,7 @@ const NewsletterForm = () => {
 	return (
 		<section
 			className="news-part"
-			style={{ background: "url(images/newsletter.jpg) no-repeat center" }}
+			style={{ background: "url(/images/newsletter.jpg) no-repeat center" }}
 		>
 			<div className="container">
 				<div className="row align-items-center">

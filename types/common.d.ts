@@ -6,6 +6,7 @@ declare module "common" {
 		ProductImage,
 		ProductReview,
 		ProductRating,
+		Customer,
 	} from "@prisma/client";
 
 	type PropsUnion = "sales" | "featured" | "latest" | "mostLiked";
@@ -25,5 +26,24 @@ declare module "common" {
 		reviews: ProductReview[];
 		wishlists: Wishlist[];
 		ratings: ProductRating[];
+	};
+
+	type ShippingAddressDetail = Prisma.ShippingAddressGetPayload<{
+		select: {
+			id: true;
+			addressLine1: true;
+			addressLine2: true;
+			city: true;
+			cityId: true;
+			province: true;
+			provinceId: true;
+			zipCode: true;
+		};
+	}>;
+
+	type CustomerAccout = Customer & { shippingAddress: ShippingAddressDetail[] };
+
+	type CheckoutProps = {
+		account: CustomerAccout;
 	};
 }
