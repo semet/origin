@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import type { CustomerAccout } from "common";
+import type { CustomerAccount } from "common";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
 

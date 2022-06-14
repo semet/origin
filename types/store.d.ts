@@ -1,5 +1,5 @@
 declare module "store" {
-	import { ProductWithDetails } from "common";
+	import { ProductWithDetails, ShippingAddressDetail } from "common";
 	import type {
 		Prisma,
 		Product,
@@ -40,5 +40,15 @@ declare module "store" {
 		items: CartItem[];
 		amount: number;
 		total: number;
+	};
+
+	type CheckoutState = {
+		courier: string;
+		cityDestination: number;
+		ShippingAddress: string;
+		deliveryCost: number;
+		deliveryService: string;
+		estimatedDelivery: string;
+		isPending: boolean;
 	};
 }

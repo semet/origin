@@ -41,9 +41,23 @@ declare module "common" {
 		};
 	}>;
 
-	type CustomerAccout = Customer & { shippingAddress: ShippingAddressDetail[] };
+	type CustomerAccount = Customer & { shippingAddress: ShippingAddressDetail[] };
 
 	type CheckoutProps = {
-		account: CustomerAccout;
+		account: CustomerAccount;
+	};
+
+	type RajaOngkirService = {
+		code: string;
+		name: string;
+		costs: {
+			service: string;
+			description: string;
+			cost: {
+				value: number;
+				etd: string;
+				note?: string;
+			}[];
+		}[];
 	};
 }

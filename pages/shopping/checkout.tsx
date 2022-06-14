@@ -10,8 +10,6 @@ import DeliveryAddress from "../../components/page/checkout/DeliveryAddress";
 import DeliveryOptions from "../../components/page/checkout/DeliveryOptions";
 import ShippingDetails from "../../components/page/checkout/ShippingDetails";
 import { getSession, useSession } from "next-auth/react";
-import { CheckoutProps } from "common";
-import auth from "../../models/auth";
 import { CtxOrReq } from "next-auth/client/_utils";
 
 const Checkout: NextPageWithLayout<{}> = () => {

@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSwr, { Fetcher, mutate } from "swr";
 import axios from "axios";
 import DeliveryAddressForm from "./DeliveryAddressForm";
 import { ShippingAddressDetail } from "common";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useDispatch } from "react-redux";
+import {
+	setShippingAddress,
+	setCityDestination,
+	setDeliveryCost,
+	setDeliveryService,
+	setEstimatedDelivery,
+	setCourier,
+} from "../../../features/checkout/checkoutSlice";
+import { useBus } from "react-bus";
 
 const DeliveryAddress: React.FC<{}> = () => {
-	const [selectedAddress, setSelectedAddress] = useState("");
+	const dispatch = useDispatch();
+	const bus = useBus();
 	const [cardIndex, setCardIndex] = useState(-1);
 	const SweetAlert = withReactContent(Swal);
-
+	//
 	const fetcher: Fetcher<ShippingAddressDetail[]> = async (url: string) => {
 		return await axios.get(url).then((res) => res.data.address);
 	};
-
 	const { data: address } = useSwr("/api/customer/delivery-address", fetcher);
-
+	//
 	const deleteAddress = async (id: string) => {
 		await SweetAlert.fire({
 			title: "Are you sure?",
@@ -45,6 +55,17 @@ const DeliveryAddress: React.FC<{}> = () => {
 			}
 		});
 	};
+	//
+	const setSelectedAddress = (address: ShippingAddressDetail) => {
+		dispatch(setShippingAddress(address.id));
+		dispatch(setCityDestination(address.city.cityId));
+		bus.emit("addressChanged");
+		//reset previously selected Service
+		dispatch(setCourier(""));
+		dispatch(setDeliveryCost(0));
+		dispatch(setDeliveryService(""));
+		dispatch(setEstimatedDelivery(""));
+	};
 	return (
 		<React.Fragment>
 			<div className="col-lg-12">
@@ -65,7 +86,7 @@ const DeliveryAddress: React.FC<{}> = () => {
 										}`}
 										onClick={() => {
 											setCardIndex(index);
-											setSelectedAddress(address.id);
+											setSelectedAddress(address);
 										}}
 									>
 										<h6>Home</h6>
