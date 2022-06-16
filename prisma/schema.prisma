@@ -138,7 +138,7 @@ model Product{
 
     images              ProductImage[]
     reviews             ProductReview[] 
-    orders              OrderItem?
+    orders              OrderItem[]
     wishlists           Wishlist[]
     ratings             ProductRating[]
     @@map("products")

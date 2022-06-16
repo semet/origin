@@ -8,6 +8,7 @@ import { RajaOngkirService } from "common";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../features/store";
 import { useListener } from "react-bus";
+import { toast } from "react-toastify";
 import {
 	setCourier,
 	setDeliveryCost,
@@ -68,6 +69,11 @@ const DeliveryOptions = () => {
 				dispatch(setEstimatedDelivery(""));
 				setCardIndex(-1);
 				// console.log(response.data);
+			})
+			.catch((err) => {
+				toast.error(`${err.message} Please try again`, {
+					position: "top-center",
+				});
 			});
 	};
 

@@ -10,6 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 				email: session?.user?.email as string,
 			},
 			select: {
+				id: true,
 				name: true,
 				email: true,
 				phone: true,
