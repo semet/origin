@@ -368,13 +368,14 @@ model Wishlist{
 
 model ProductRating{
     id                Int @id @default(autoincrement())
-    customer          Customer @relation(fields: [customerId], references: [id])
-    customerId        String @map("customer_id")
-    product           Product @relation(fields: [productId], references: [id])
-    productId         String @map("product_id")
+    customer          Customer @relation(fields: [customerId], references: [id])  
+    customerId        String @map("customer_id") 
+    product           Product @relation(fields: [productId], references: [id]) 
+    productId         String @map("product_id") 
     rating            Int @map("value")
     createdAt         DateTime @default(now()) @map("created_at")
     updatedAt         DateTime @updatedAt @map("updated_at")
+
 
     @@map("product_ratings")
 }

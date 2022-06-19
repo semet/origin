@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Dispatch } from "@reduxjs/toolkit";
 import { ProductWithDetails } from "common";
+import Link from "next/link";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../features/cart/cartSlice";
@@ -63,7 +64,9 @@ const ProductSaleSection: React.FC<Props> = ({ products }) => {
 										<i className="icofont-star" />
 									</div>
 									<h6 className="product-name">
-										<a href="#">{product.name}</a>
+										<Link href={`/product/${product.id}`}>
+											<a>{product.name}</a>
+										</Link>
 									</h6>
 									<h6 className="product-price">
 										<del>{product.oldPrice}</del>

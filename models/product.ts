@@ -160,6 +160,33 @@ const product = {
 			take: limit,
 		});
 	},
+	find: async (id: string | undefined) => {
+		return await prisma.product.findUnique({
+			where: {
+				id: id,
+			},
+			include: {
+				images: true,
+				reviews: {
+					include: {
+						customer: true,
+					},
+				},
+				_count: {
+					select: {
+						reviews: true,
+					},
+				},
+			},
+		});
+	},
+	all: async () => {
+		return await prisma.product.findMany({
+			select: {
+				id: true,
+			},
+		});
+	},
 };
 
 export default product;

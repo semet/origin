@@ -272,3 +272,69 @@ export const productPreviewThumb: Settings = {
 		},
 	],
 };
+
+export const productDetailsPreview: Settings = {
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	arrows: false,
+	fade: true,
+	//  asNavFor: '.details-thumb',
+	responsive: [
+		{
+			breakpoint: 576,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: true,
+			},
+		},
+	],
+};
+
+export const productDetailsThumb: Settings = {
+	slidesToShow: 5,
+	slidesToScroll: 1,
+	// asNavFor: ".details-preview",
+	dots: false,
+	arrows: false,
+	focusOnSelect: true,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+			},
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 5,
+				slidesToScroll: 1,
+			},
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 4,
+				slidesToScroll: 1,
+			},
+		},
+		{
+			breakpoint: 576,
+			settings: {
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				vertical: false,
+			},
+		},
+		{
+			breakpoint: 400,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+				vertical: false,
+			},
+		},
+	],
+};

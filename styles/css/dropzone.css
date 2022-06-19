@@ -1,0 +1,16 @@
+.dropzone {
+	outline: 2px dashed #ccc;
+	padding: 10px;
+	background-color: rgb(241, 240, 240);
+	border-radius: 5px;
+	height: 100px;
+	text-align: center;
+}
+.dropzone p {
+	padding-top: 30px;
+}
+
+.dropzone-files {
+	display: flex;
+	flex-direction: column;
+}

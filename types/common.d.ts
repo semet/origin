@@ -26,6 +26,7 @@ declare module "common" {
 		reviews: ProductReview[];
 		wishlists: Wishlist[];
 		ratings: ProductRating[];
+		_count: Prisma.ProductCountOutputType;
 	};
 
 	type ShippingAddressDetail = Prisma.ShippingAddressGetPayload<{
@@ -60,4 +61,16 @@ declare module "common" {
 			}[];
 		}[];
 	};
+
+	type ProductPageProps = {
+		product: ProductWithDetails;
+	};
+
+	type ProductReviewWithUser = {
+		[k in keyof ProductReview]: ProductReview[k];
+	} & Prisma.ProductReviewGetPayload<{
+		include: {
+			customer: true;
+		};
+	}>;
 }
