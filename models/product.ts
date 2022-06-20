@@ -172,6 +172,7 @@ const product = {
 						customer: true,
 					},
 				},
+				ratings: true,
 				_count: {
 					select: {
 						reviews: true,
