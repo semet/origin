@@ -2,13 +2,13 @@ import React, { Fragment, useEffect } from "react";
 import { ProductWithDetails } from "common";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../features/cart/cartSlice";
+import { useRating } from "../../../utils/getRating";
+import ProductRating from "../../ui/ProductRating";
 
 const ProductSummary: React.FC<{ product: ProductWithDetails }> = ({ product }) => {
 	const dispatch = useDispatch();
-	const rating =
-		product.ratings.map((r) => r.rating).reduce((a, b) => a + b, 0) /
-		product.ratings.length;
-	const roundedRating = Math.round(rating);
+	const { rating, plainRating, roundedRating } = useRating(product.id);
+
 	return (
 		<div className="col-lg-6">
 			<div className="details-content">
@@ -27,21 +27,22 @@ const ProductSummary: React.FC<{ product: ProductWithDetails }> = ({ product }) 
 				</div>
 
 				<div className="details-rating">
-					{product.ratings.length > 0
+					{/* {rating !== undefined && rating.length > 0
 						? Array(roundedRating)
 								.fill(0)
 								.map((_, index) => (
 									<i className="active icofont-star" key={index} />
 								))
 						: null}
-					{product.ratings.length > 0
+					{rating !== undefined && rating.length > 0
 						? Array(5 - roundedRating)
 								.fill(0)
 								.map((_, index) => <i className="icofont-star" key={index} />)
 						: Array(5)
 								.fill(0)
 								.map((_, index) => <i className="icofont-star" key={index} />)}
-					<a href="#">({roundedRating})</a>
+					<a href="#">({roundedRating})</a> */}
+					<ProductRating productId={product.id} />
 				</div>
 				<h3 className="details-price">
 					{product.oldPrice && (

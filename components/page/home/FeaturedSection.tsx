@@ -6,6 +6,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { setSelectedProduct } from "../../../features/product/productSlice";
 import { isNewProduct } from "../../../utils/common";
 import { addItem } from "../../../features/cart/cartSlice";
+import ProductRating from "../../ui/ProductRating";
 
 type Props = {
 	products: ProductWithDetails[];
@@ -67,12 +68,7 @@ const FeaturedSection: React.FC<Props> = ({ products }) => {
 										<a href="product-video.html">{product.name}</a>
 									</h6>
 									<div className="feature-rating">
-										<i className="active icofont-star" />
-										<i className="active icofont-star" />
-										<i className="active icofont-star" />
-										<i className="active icofont-star" />
-										<i className="icofont-star" />
-										<a href="product-video.html">(3 Reviews)</a>
+										<ProductRating productId={product.id} />
 									</div>
 									<h6 className="feature-price">
 										{product.isDiscounted && (

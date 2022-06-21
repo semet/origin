@@ -6,6 +6,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../features/cart/cartSlice";
 import { setSelectedProduct } from "../../../features/product/productSlice";
+import { useRating } from "../../../utils/getRating";
+import ProductRating from "../../ui/ProductRating";
 
 type Props = {
 	products: ProductWithDetails[];
@@ -57,11 +59,7 @@ const ProductSaleSection: React.FC<Props> = ({ products }) => {
 								</div>
 								<div className="product-content">
 									<div className="product-rating">
-										<i className="active icofont-star" />
-										<i className="active icofont-star" />
-										<i className="active icofont-star" />
-										<i className="active icofont-star" />
-										<i className="icofont-star" />
+										<ProductRating productId={product.id} />
 									</div>
 									<h6 className="product-name">
 										<Link href={`/product/${product.id}`}>

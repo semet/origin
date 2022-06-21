@@ -8,6 +8,7 @@ import { setSelectedProduct } from "../../../features/product/productSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../features/cart/cartSlice";
+import ProductRating from "../../ui/ProductRating";
 
 type Props = {
 	products: ProductWithDetails[];
@@ -70,12 +71,7 @@ const NewItemSection: React.FC<Props> = ({ products }) => {
 										</div>
 										<div className="product-content">
 											<div className="product-rating">
-												<i className="active icofont-star" />
-												<i className="active icofont-star" />
-												<i className="active icofont-star" />
-												<i className="active icofont-star" />
-												<i className="icofont-star" />
-												<a href="product-video.html">(3)</a>
+												<ProductRating productId={product.id} />
 											</div>
 											<h6 className="product-name">
 												<a href="product-video.html">{product.name}</a>

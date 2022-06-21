@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../../features/product/productSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { addItem } from "../../../features/cart/cartSlice";
+import ProductRating from "../../ui/ProductRating";
+import Link from "next/link";
 
 type Props = Record<"sales" | "features" | "mostLiked", ProductWithDetails[]>;
 
@@ -91,14 +93,12 @@ const MixedStatus: React.FC<Props> = (props) => {
 									</div>
 									<div className="product-content">
 										<div className="product-rating">
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="icofont-star" />
+											<ProductRating productId={product.id} />
 										</div>
 										<h6 className="product-name">
-											<a href="product-video.html">{product.name}</a>
+											<Link href={`/product/${product.id}`}>
+												<a>{product.name}</a>
+											</Link>
 										</h6>
 										<h6 className="product-price">
 											{product.oldPrice && (
@@ -172,14 +172,12 @@ const MixedStatus: React.FC<Props> = (props) => {
 									</div>
 									<div className="product-content">
 										<div className="product-rating">
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="icofont-star" />
+											<ProductRating productId={product.id} />
 										</div>
 										<h6 className="product-name">
-											<a href="#">{product.name}</a>
+											<Link href={`/product/${product.id}`}>
+												<a>{product.name}</a>
+											</Link>
 										</h6>
 										<h6 className="product-price">
 											{product.oldPrice && (
@@ -248,14 +246,12 @@ const MixedStatus: React.FC<Props> = (props) => {
 									</div>
 									<div className="product-content">
 										<div className="product-rating">
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="active icofont-star" />
-											<i className="icofont-star" />
+											<ProductRating productId={product.id} />
 										</div>
 										<h6 className="product-name">
-											<a href="product-video.html">{product.name}</a>
+											<Link href={`/product/${product.id}`}>
+												<a>{product.name}</a>
+											</Link>
 										</h6>
 										<h6 className="product-price">
 											{product.oldPrice && (

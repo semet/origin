@@ -1,4 +1,3 @@
-import { Customer } from "@prisma/client";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
@@ -9,7 +8,6 @@ import * as Yup from "yup";
 
 const ReviewForm: React.FC<{ productId: string }> = ({ productId }) => {
 	const { status } = useSession();
-
 	const formik = useFormik({
 		initialValues: {
 			body: "",
@@ -44,8 +42,9 @@ const ReviewForm: React.FC<{ productId: string }> = ({ productId }) => {
 				rating: rating,
 				productId: productId,
 			})
-			.then((response) => {
+			.then(async (response) => {
 				console.log(response.data.data);
+				await mutate(`fetchRating/${productId}`);
 			})
 			.catch((error) => {
 				console.log(error);

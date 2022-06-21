@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { ProductPageProps } from "common";
 import product from "../../models/product";
-import React, { Fragment, ReactElement } from "react";
+import React, { Fragment, ReactElement, useEffect } from "react";
 import MainLayout from "../../components/layouts/MainLayout";
 import { GetStaticProps, GetStaticPaths, NextPageWithLayout } from "next";
 import PageBanner from "../../components/partials/PageBanner";
